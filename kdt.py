@@ -1,6 +1,4 @@
-
-
-
+# KD Tree example
 import numpy as np
 from sklearn.neighbors import KDTree 
 
