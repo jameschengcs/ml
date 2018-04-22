@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn import tree
 from sklearn.datasets import load_iris
-import pydot
+import pydot	# It requires installing pydot and graphviz
 
 iris = load_iris()
 clf = tree.DecisionTreeClassifier()
