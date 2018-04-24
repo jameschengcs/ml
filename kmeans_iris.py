@@ -6,9 +6,9 @@ from sklearn.cluster import KMeans
 iris = load_iris()
 for nK in range(1, 6):
     kmeans = KMeans(n_clusters=nK, random_state=0).fit(iris.data)
-    
-    sumd = np.ndarray(shape=(nK, 1))
-    
+
+    sumd = np.zeros(shape=(nK, 1))
+    print("!", sumd)
     for i in range(len(iris.data)):
         k = kmeans.labels_[i]
         ui = kmeans.cluster_centers_[k]
