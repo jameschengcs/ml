@@ -40,6 +40,7 @@ cost = tf.reduce_sum(tf.pow(pred-Y, 2))/(2*n_samples)
 # Gradient descent
 #  Note, minimize() knows to modify W and b because Variable objects are trainable=True by default
 optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+# optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
 # Initialize the variables (i.e. assign their default value)
 init = tf.global_variables_initializer()
