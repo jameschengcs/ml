@@ -1,0 +1,64 @@
+# Only feature 12, 'LSTAT'
+import tensorflow as tf
+import numpy as np
+from sklearn.datasets import load_boston
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+
+Boston = load_boston()
+n, m = np.shape(Boston.data) # n records of m features
+
+print(n, m)
+print(Boston.feature_names)
+#print(Boston.target)
+print(Boston.data[0])
+
+X_train, X_test, Y_train, Y_test = train_test_split(Boston.data, Boston.target,
+                                                    test_size = 0.2, random_state=5)
+nTrain = X_train.shape[0]
+nTest = X_test.shape[0]
+
+Xs = X_train[:, 12] 
+Xt = X_test[:, 12] 
+Xmin, Xmax = np.min(Xs), np.max(Xs)
+
+# Variable initialization
+X = tf.placeholder(dtype = tf.float32, shape = [1, 1])
+Y = tf.placeholder(dtype = tf.float32, shape = [1, 1])
+
+XA = tf.placeholder(dtype = tf.float32, shape = [nTest, 1])
+YA = tf.placeholder(dtype = tf.float32, shape = [nTest, 1])
+
+
+# Set model weights
+W = tf.Variable(tf.random.uniform([1, 1], dtype = tf.float32))
+B = tf.Variable(tf.random.uniform([1], dtype = tf.float32))
+E = tf.Variable([0.0])
+                                                
+# Operation definition
+pred = tf.nn.xw_plus_b(X, W, B)
+#loss = tf.reduce_sum(tf.pow(pred - Y, 2)) / (2 * nTrain)
+#loss = tf.losses.mean_squared_error(Y, pred)
+loss = tf.losses.absolute_difference(Y, pred)
+predAll = tf.nn.xw_plus_b(XA, W, B)
+#lossAll = tf.losses.mean_squared_error(YA, predAll)
+lossAll = tf.losses.absolute_difference(YA, predAll)
+learning_rate = 0.1
+#opt = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)                                            
+opt = tf.train.AdamOptimizer(learning_rate).minimize(loss)                                            
+init = tf.global_variables_initializer()
+
+with tf.Session() as sess:
+    sess.run(init)
+    for i in range(10):
+        for (x, y) in zip(Xs, Y_train):            
+            sess.run(opt, feed_dict={X: np.reshape(x, [1, 1]), Y: np.reshape(y, [1, 1])})
+        error = sess.run(lossAll, feed_dict={XA: np.reshape(Xt, [nTest, 1]), YA: np.reshape(Y_test, [nTest, 1])})
+        w, b = sess.run(W)[0], sess.run(B)[0]
+        print('W, B: ', w, b)
+        print('error: ', error)
+        
+        
+        plt.plot(Xs, Y_train, 'ro')
+        plt.plot([Xmin, Xmax], [Xmin * w + b, Xmax * w + b], linestyle='solid')
+        plt.show()
