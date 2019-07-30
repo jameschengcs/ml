@@ -7,7 +7,7 @@ Y2 = [0.12, 0.34, 0.56, 0.78, 0.91, 0.1112, 0.1314]
 
 X = tf.placeholder(dtype=tf.float32, shape=[7, 2])
 Y = tf.placeholder(dtype=tf.float32, shape=[7])
-ds = tf.data.Dataset.from_tensor_slices((X, Y)).shuffle(buffer_size = 10)
+ds = tf.data.Dataset.from_tensor_slices((X, Y)).shuffle(buffer_size = 7)
 
 itr = ds.make_initializable_iterator()
 elem = itr.get_next()
