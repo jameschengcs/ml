@@ -1,4 +1,3 @@
-# All features 
 import tensorflow as tf
 import numpy as np
 from sklearn.datasets import load_iris
@@ -26,7 +25,7 @@ nTest = int(m * test_ratio)
 nBatch = nTrain // nItem;
 print(nTrain, nTest, nBatch)
 
-# Variable initialization
+# data initialization
 X = tf.placeholder(dtype = tf.float32, shape = [nItem, n])
 Y = tf.placeholder(dtype = tf.float32, shape = [nItem, k])
 XT = tf.placeholder(dtype = tf.float32, shape = [nTest, n])
