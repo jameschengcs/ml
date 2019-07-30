@@ -20,13 +20,17 @@ elemTest2 = itrTest2.get_next()
 with tf.Session() as sess:
     print('Origin')
     for i in range(7):
-        print(sess.run(elem))        
+        ins = sess.run(elem)
+        print(ins[0], ins[1])     
     print('Train')
     for i in range(5):
-        print(sess.run(elemTrain))
+        ins = sess.run(elemTrain)
+        print(ins[0], ins[1])
     print('Test')  
     for i in range(2):
-        print(sess.run(elemTest))        
+        ins = sess.run(elemTest)
+        print(ins[0], ins[1])    
     print('Test2')  
     for i in range(2):
-        print(sess.run(elemTest2)) 
+        ins = sess.run(elemTest2)
+        print(ins[0], ins[1])    
