@@ -13,7 +13,7 @@ with tf.Session() as sess:
         print(sess.run(elem))
         
 print('Shuffled data')        
-dss = ds.shuffle(buffer_size = 1000) # Don't forget to update the dataset    
+dss = ds.shuffle(buffer_size = 7) # Don't forget to update the dataset    
 itr = dss.make_one_shot_iterator()
 elem = itr.get_next()
 with tf.Session() as sess:
