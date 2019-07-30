@@ -10,7 +10,8 @@ itr = ds.make_one_shot_iterator()
 elem = itr.get_next()
 with tf.Session() as sess:
     for i in range(7):
-        print(sess.run(elem))
+        ins = sess.run(elem)
+        print(ins[0], ins[1])
         
 print('Shuffled data')        
 dss = ds.shuffle(buffer_size = 7) # Don't forget to update the dataset    
@@ -34,4 +35,5 @@ itr = dsb.make_one_shot_iterator()
 elem = itr.get_next()
 with tf.Session() as sess:
     for i in range(5):
-        print(i, ":", sess.run(elem))
+        B = sess.run(elem)
+        print(B[0], B[1])
