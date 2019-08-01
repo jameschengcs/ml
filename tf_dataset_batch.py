@@ -7,7 +7,10 @@ m = 7
 batchSize = 3
 batches = m / batchSize
 epochs = 4
-ds = tf.data.Dataset.from_tensor_slices((X, Y)).shuffle(buffer_size = batchSize, reshuffle_each_iteration = False).batch(batchSize, drop_remainder = True).repeat(epochs)
+ds = tf.data.Dataset.from_tensor_slices((X, Y))
+ds = ds.repeat(epochs)
+ds = ds.shuffle(buffer_size = batchSize, reshuffle_each_iteration = True)
+ds = ds.batch(batchSize, drop_remainder = True)
 itr = ds.make_one_shot_iterator()
 elem = itr.get_next()
 
