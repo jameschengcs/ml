@@ -3,8 +3,7 @@ import numpy as np
 import tensorflow as tf
 X = [[1., 2.],     [3., 4.],     [5., 6.],     [7., 8.],     [9., 10.],    [11., 12.],   [13., 14.]] # (7, 2)
 Y = [[0., 0., 1.], [1., 0., 0.], [0., 1., 0.], [1., 0., 0.], [0., 0., 1.], [1., 0., 0.], [0., 1., 0.]] # (7, 3)
-T = np.array([[[1, 2], [1, 0, 1]]])
-print(T.shape)
+
 ds = tf.data.Dataset.from_tensor_slices((X, Y)).shuffle(buffer_size = 7, reshuffle_each_iteration = False)
 itr = ds.make_one_shot_iterator()
 elem = itr.get_next()
