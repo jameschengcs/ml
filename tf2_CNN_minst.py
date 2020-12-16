@@ -18,11 +18,11 @@ init = tf.keras.initializers.Zeros()
 model = tf.keras.models.Sequential()
 
 model.add(Conv2D(16, 5, strides=2, kernel_initializer = init, activation = 'relu', padding = 'same'))
-model.add(MaxPooling2D(pool_size = (2, 2)))
+model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
 model.add(Conv2D(32, 3, strides=2, kernel_initializer = init, activation = 'relu', padding = 'same'))
-model.add(MaxPooling2D(pool_size = (2, 2)))
+model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
 model.add(Flatten())
-model.add(Dense(32, activation='relu', kernel_initializer = init))
+model.add(Dense(20, activation='relu', kernel_initializer = init))
 model.add(Dense(10, activation='softmax', kernel_initializer = init))
 
 
